@@ -1,0 +1,22 @@
+{% extends "base_generic.html" %}
+{% block content %}
+  <h2>每月摘要</h2>
+  <form method="GET" action=".">
+    <label for="year">年份:</label>
+    <select name="year" id="year">
+      {% for year in years %}
+        <option value="{{ year }}" {% if current_year == year %}selected{% endif %}>{{ year }}</option>
+      {% endfor %}
+    </select>
+    <label for="month">月份:</label>
+    <select name="month" id="month">
+      {% for month in months %}
+        <option value="{{ month }}" {% if current_month == month %}selected{% endif %}>{{ month }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit">查看</button>
+  </form>
+  <p>本月收入: {{ income }}</p>
+  <p>本月支出: {{ expense }}</p>
+  <p>總金額: {{ total }}</p>
+{% endblock %}

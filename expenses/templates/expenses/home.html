@@ -1,0 +1,43 @@
+{% extends "base_generic.html" %}
+{% block content %}
+  <div class="jumbotron text-center">
+    <h1 class="display-4">歡迎來到我的記帳管理</h1>
+    <p class="lead">管理您的收入和支出，讓您的財務更健康。</p>
+    {% if user.is_authenticated %}
+        <a class="btn btn-primary btn-lg" href="{% url 'expense_list' %}" role="button">查看記帳列表</a>
+        <a class="btn btn-success btn-lg" href="{% url 'expense_create' %}" role="button">新增記帳</a>
+    {% else %}
+        <a class="btn btn-primary btn-lg" href="{% url 'login' %}" role="button">登入</a>
+        <a class="btn btn-success btn-lg" href="{% url 'register' %}" role="button">註冊</a>
+    {% endif %}
+  </div>
+  <div class="row text-center">
+    <div class="col-md-4 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">記帳列表</h5>
+          <p class="card-text">查看和管理所有的記帳條目。</p>
+          <a class="btn btn-secondary" href="{% url 'expense_list' %}" role="button">查看更多 &raquo;</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">支出圖表</h5>
+          <p class="card-text">通過圖表分析您的支出情況。</p>
+          <a class="btn btn-secondary" href="{% url 'expense_chart' %}" role="button">查看更多 &raquo;</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">收入和支出報告</h5>
+          <p class="card-text">查看詳細的收入和支出報告。</p>
+          <a class="btn btn-secondary" href="{% url 'expense_report' %}" role="button">查看更多 &raquo;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

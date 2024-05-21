@@ -1,0 +1,35 @@
+{% extends "base_generic.html" %}
+{% block content %}
+  <h2>記帳列表</h2>
+  <form method="GET" action="." class="expense-form">
+    <input type="text" name="query" placeholder="搜尋標題..." value="{{ query }}">
+    <select name="category">
+      <option value="">所有類別</option>
+      <option value="food" {% if category == 'food' %}selected{% endif %}>食品</option>
+      <option value="transport" {% if category == 'transport' %}selected{% endif %}>交通</option>
+      <option value="entertainment" {% if category == 'entertainment' %}selected{% endif %}>娛樂</option>
+      <option value="other" {% if category == 'other' %}selected{% endif %}>其他</option>
+    </select>
+    <label for="start_date">開始日期:</label>
+    <input type="date" id="start_date" name="start_date" value="{{ start_date }}">
+    <label for="end_date">結束日期:</label>
+    <input type="date" id="end_date" name="end_date" value="{{ end_date }}">
+    <button type="submit">搜尋</button>
+  </form>
+  <ul class="expense-list">
+    {% for expense in expenses %}
+      <li>
+        {{ expense.title }} - {{ expense.amount }} - {{ expense.date }} - {{ expense.get_category_display }} - {{ expense.get_type_display }} - {{ expense.get_bank_display }}
+        <a href="{% url 'expense_edit' expense.pk %}">編輯</a>
+        <a href="{% url 'expense_delete' expense.pk %}">刪除</a>
+      </li>
+    {% endfor %}
+  </ul>
+  <h3>目前剩餘金額: {{ remaining_balance }}</h3>
+  <h3>銀行金額:</h3>
+  <ul>
+    {% for bank in bank_balances %}
+      <li>{{ bank.bank }}: {{ bank.total_amount }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

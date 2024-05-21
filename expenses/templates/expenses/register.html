@@ -1,0 +1,11 @@
+{% extends "base_generic.html" %}
+{% block content %}
+  <div class="container">
+      <h2>註冊</h2>
+      <form method="POST">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" class="btn btn-primary">註冊</button>
+      </form>
+  </div>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "base_generic.html" %}
+{% block content %}
+  <h2>登入</h2>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">登入</button>
+  </form>
+{% endblock %}
